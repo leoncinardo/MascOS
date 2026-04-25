@@ -5,7 +5,7 @@
 
 
 ## Program structure
-If you're program is a .COM executable file it **must** have the `ORG 0x100` directive. If instead it's a .BIN executable then remove that directive.
+To have a program compiled and be put on the os image put the file inside the `Programs/` folder. Make sure the filename is less or equal to 8 characters long. If you're program is a .COM executable file it **must** have the `ORG 0x100` directive. If instead it's a .BIN executable then remove that directive.
 
 The general layout of a program is this:
 ```x86asm
