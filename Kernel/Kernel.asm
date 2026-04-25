@@ -1,9 +1,11 @@
-[org 0x0]
-[bits 16]
-[cpu 8086]
 
+ORG 0x0
+BITS 16
+CPU 8086
 
-cli ; No interruptions please
+SECTION .text
+
+cli
 jmp KernelMain
 
 %define NewLine 10, 13
@@ -317,6 +319,8 @@ BiosEquipmentWord: dw 0 ; Are there any serial, parallel ports and other stuff
 
 ; Ports info
 ParallelPorts: times 3 dw 0
+
+SECTION .data
 
 ComExtension: db "COM", 0
 BinExtension: db "BIN", 0

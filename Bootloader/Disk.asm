@@ -1,5 +1,6 @@
-[bits 16]
-[cpu 8086]
+
+BITS 16
+CPU 8086
 
 
 ; *NOTES
@@ -23,6 +24,8 @@
 ; *Useful stuff:
 ; https://www.win.tue.nl/~aeb/linux/fs/fat/fat-1.html
 
+
+SECTION .text
 
 
 ; Reads the disk into the specified buffer in memory

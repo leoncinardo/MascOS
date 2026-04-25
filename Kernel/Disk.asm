@@ -1,10 +1,11 @@
-[bits 16]
-[cpu 8086]
 
+BITS 16
+CPU 8086
 
 ; This file basically contains only the stuff needed for the kernel from Disk.asm in the bootloader.
 ; Some labels have been modified too, so it's not completely useless.
 
+SECTION .text
 
 ; Where int 0x22 brings us to
 ; Input:
@@ -584,7 +585,6 @@ DiskError:
     ret
 
 
-
 CurrentDisk: db 0
 CurrentCluster: dw 0
 FileOffset: dw 0
@@ -601,4 +601,7 @@ ChsTrack: db 0
 ChsHead: db 0
 
 ReadAttempts: db 0
+
+SECTION .data
+
 DiskErrorMessage: db "Disk read/write error, idiot", 0

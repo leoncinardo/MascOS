@@ -1,11 +1,12 @@
-[bits 16]
-[org 0x100]
-[cpu 8086]
+
+BITS 16
+CPU 8086
+ORG 0x100
 
 
 ; * This is a simple file manager made for MascOS
 
-
+SECTION .text
 
 ; Just waits till a key is pressed
 ;
@@ -258,6 +259,12 @@ CheckFileExtension:
         ret
 
 
+FileCounter: db 0
+NormalColour: db 0
+AccentColour: db 0
+
+SECTION .data
+
 AppString: db "File manager v0.0.1  |  ", 0
 DriveString: db "Boot drive", 0
 FileNameSpacing: db "      ", 0
@@ -267,6 +274,3 @@ UnknownFileString: db "Wait for next release :)", 0
 TextFileExtension: db "TXT"
 ExecFileExtension: db "COM"
 TextEditorName: db "TRASHVIMCOM", 0
-FileCounter: db 0
-NormalColour: db 0
-AccentColour: db 0

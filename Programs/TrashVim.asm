@@ -1,6 +1,7 @@
-[bits 16]
-[org 0x100]
-[cpu 8086]
+
+BITS 16
+CPU 8086
+ORG 0x100
 
 
 ; *This is the text editor program for MascOS
@@ -15,15 +16,9 @@
 ; You can also exit by pressing Esc twice if you are editing text, or once when you aren't.
 
 
+SECTION .text
 
 jmp EditProgram
-
-
-
-
-BarsDefaultColour equ 0xf0
-NormalColour: db 0
-AccentColour: db 0
 
 
 
@@ -242,14 +237,19 @@ TextEdit:
 
 
 
-EditingMessage: db "                        Currently editing  "
+BarsDefaultColour equ 0xf0
+NormalColour: db 0
+AccentColour: db 0
+ModeSelectorBuffer: times 6 db 0
 FileName: times 12 db 0
+
+TextBuffer: times 512 db 0
+times 50 db 0
+
+SECTION .data
+
+EditingMessage: db "                        Currently editing  "
 BottomBarModeSelector: db "Press enter to edit  |  Esc to exit program                      TrashVim v0.1.0", 0
 BottomBarEditMode: db "Esc: exit edit mode", 0
 ModeSelectorText: db "W: save changes  Q: exit program", 0
 SaveMessage: db "Can't save files for now :/", 0
-ModeSelectorBuffer: times 6 db 0
-
-TextBuffer: times 512 db 0
-
-times 50 db 0

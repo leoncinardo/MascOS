@@ -1,6 +1,8 @@
-[bits 16]
-[cpu 8086]
 
+BITS 16
+CPU 8086
+
+SECTION .text
 
 
 ; Gets the lenght of a string

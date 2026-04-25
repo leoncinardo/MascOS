@@ -1,10 +1,12 @@
-[bits 16]
-[cpu 8086]
+
+BITS 16
+CPU 8086
 
 
 ; *Parallel ports driver
 
 
+SECTION .text
 
 ; *NOTE: hasn't been tested
 ; Sends a byte to device connected to the first parallel port

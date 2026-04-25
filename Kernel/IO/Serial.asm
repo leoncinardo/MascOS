@@ -1,14 +1,15 @@
-[bits 16]
-[cpu 8086]
+
+BITS 16
+CPU 8086
 
 ; *Serial ports driver
 ; * NOTE: ports can have different I/O ports, check BDA for port address
 
+SECTION .text
 
 COM1 equ 0x3f8
 COM2 equ 0x2f8
 COM3 equ 0x3e8
-
 
 ; Sets baud rate divisor and checks if the serial port is good or not good
 ; Output:

@@ -1,8 +1,8 @@
-[bits 16]
-[cpu 8086]
 
+BITS 16
+CPU 8086
 
-
+SECTION .text
 
 LoadFat:
     ; FATs are just after the reserved sectors, so...

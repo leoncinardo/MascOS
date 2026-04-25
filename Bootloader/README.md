@@ -11,4 +11,4 @@ Simple 16-bit bootloader that fits in 1 sector(512 bytes) that loads and execute
  - Probably doesn't work.
 
 
-Yes *it works* on real hardware but only in legacy BIOS systems, not modern UEFI computers.
+Yes *it works* on real hardware.

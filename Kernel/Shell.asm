@@ -1,6 +1,6 @@
-[bits 16]
-[cpu 8086]
 
+BITS 16
+CPU 8086
 
 ; *General notes
 ; * Scan code of enter is 13
@@ -8,9 +8,9 @@
 ; * Scan code of space is 32
 
 
+SECTION .text
+
 CommandThingColor equ 0xa
-
-
 
 ; Just waits till a key is pressed
 ;
@@ -63,6 +63,9 @@ GetCommand:
         jz .AddNewLine
 
         .ExecCommand:
+			; * I had an idea to not have a long list of checks here:
+			; * create an array of pointers to commands and associate an index to them in the array,
+			; * so that you know the index and just jump to the pointer associated to that index
             lea di, helpCmdStr
             call CompareCommand
             jnc HelpCmd
@@ -349,13 +352,14 @@ CommandNotFound:
     ret
 
 
-
-
+%include "./Kernel/ShellCommands.asm"
 
 CommandBuffer: times 32 db 0
 AttributesBuffer: times 64 db 0
 AttributesBufferPos: db 0
 AttributesCounter: db 0
+
+SECTION .data
 
 CommandThing: db "-> ", 0
 InitShellMessage: db "Write 'help' to see command list", NewLine, NewLine, 0
@@ -378,6 +382,3 @@ shutdownCmdStr: db "shutdown", 0xff
 standbyCmdStr: db "standby", 0xff
 runCmdStr: db "run", 0xff
 filesCmdStr: db "files", 0xff
-
-
-%include "./Kernel/ShellCommands.asm"

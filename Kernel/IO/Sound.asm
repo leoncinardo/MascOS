@@ -1,10 +1,12 @@
-[bits 16]
-[cpu 8086]
+
+BITS 16
+CPU 8086
 
 ; https://wiki.osdev.org/PC_Speaker
 ; https://forum.osdev.org/viewtopic.php?f=13&t=17293
 
 
+SECTION .text
 
 SoundIntHandler:
     or ah, ah

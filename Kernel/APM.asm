@@ -1,5 +1,6 @@
-[bits 16]
-[cpu 8086]
+
+BITS 16
+CPU 8086
 
 
 ; *APM driver
@@ -15,6 +16,7 @@
 ; https://wiki.osdev.org/APM
 
 
+SECTION .text
 
 ApmInit:
     ; Installation check
@@ -135,8 +137,11 @@ ApmStandby:
 
         ret
 
+ApmErrorByte: db 0
+ApmMinorVersion: db 0
+
+SECTION .data
+
 ApmGeneralError: db NewLine, "APM error while running ApmInit", 0
 ApmOldVerMessage: db "Old APM version: v1.0", 0
 ApmShutdownError: db NewLine, "Can't shutdown computer: APM version 1.0 or ApmInit error", 0
-ApmErrorByte: db 0
-ApmMinorVersion: db 0

@@ -1,5 +1,6 @@
-[bits 16]
-[cpu 8086]
+
+BITS 16
+CPU 8086
 
 ; *Byte to insert in Mode/Command register at I/O port 0x43:
 ; Bits 7-6: channel             00
@@ -12,8 +13,10 @@
 ; https://wiki.osdev.org/Pit
 ; I don't understand anything about this
 
+SECTION .text
+
+
 PitSoundReloadValue equ 27 ; Frequency: 44192
-TimerCountdown: dw 0
 Irq0Offset equ 8 * 4
 
 
@@ -31,7 +34,6 @@ PitInit:
 
     sti
     ret
-
 
 
 ; Waits the specified time of milliseconds
@@ -54,3 +56,6 @@ Irq0Isr:
     out 0x20, al
 
     iret
+
+
+TimerCountdown: dw 0

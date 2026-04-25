@@ -1,16 +1,15 @@
-[org 0x7c00]
-[bits 16]
-[cpu 8086]
+
+CPU 8086
+BITS 16
+ORG 0x7c00
 
 ; *IMPORTANT STUFF
 ; *FAT stuff: https://en.wikipedia.org/wiki/Design_of_the_FAT_file_system
 
-
-
+SECTION .text
 
 jmp short Start
 nop
-
 
 
 ; --//  BIOS paramenter block (BPB)  \\--
@@ -38,7 +37,6 @@ db Signature ; Or 0x28 or 0x29
 dd VolumeId ; Ignore I you aren't willing to put one
 VolumeLabel: db "MASCOS     " ; Anything but must be 11 bytes
 FileSystem: db "FAT12   " ; Don't touch pls
-
 
 
 ; --//  Bootloader code  \\--
@@ -77,13 +75,13 @@ Main:
     hlt
 
 
-BootMessage: db "Preparing the couch for kernel...", 0
-
-
 %include "./Bootloader/Print.asm"
 %include "./Bootloader/Disk.asm"
 %include "./Bootloader/Common.inc"
 
+
+
+BootMessage: db "Preparing the couch for kernel...", 0
 
 ; Fills the rest of the sector with 0s and boot signature
 times 510-($-$$) db 0

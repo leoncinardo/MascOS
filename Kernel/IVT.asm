@@ -1,5 +1,6 @@
-[bits 16]
-[cpu 8086]
+
+BITS 16
+CPU 8086
 
 
 ; *This file creates custom interrupts in the IVT
@@ -14,6 +15,7 @@
 ;  0x80 - 0x400 |  0x20 - 0xff |  Interrupts we can set
 
 
+SECTION .text
 
 ; Sets the os own interrupts into the IVT
 SetNewInterrupts:
@@ -45,6 +47,7 @@ SetNewInterrupts:
     ret
 
 
+SECTION .data
 
 IntTable:
     dw ProgramEndPoint ; Int 0x20

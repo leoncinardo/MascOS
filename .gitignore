@@ -1,3 +1,6 @@
 Changes.md
 QemuLog.log
-Build/
+Build/*
+dosdefender-ld31/
+floppybird/
+.gitignore

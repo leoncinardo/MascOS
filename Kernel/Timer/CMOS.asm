@@ -1,5 +1,6 @@
-[bits 16]
-[cpu 8086]
+
+BITS 16
+CPU 8086
 
 
 
@@ -12,6 +13,7 @@
 ; https://github.com/Joshua-Riek/x86-kernel/blob/master/src/cmos.asm
 
 
+SECTION .text
 
 CmosAddressPort equ 0x70
 CmosDataPort equ 0x71
@@ -25,7 +27,6 @@ RtcSeconds equ 0x00
 
 NmiDisableBit equ 0x01
 NmiEnableBit equ 0x00
-
 
 
 ; Read a CMOS register
@@ -81,7 +82,7 @@ CmosGetSystemDate:
     jmp .GetMonth
 
     .NextCentury:
-        add ax, word 2005
+        add ax, word 2006
 
     .GetMonth:
         mov bx, ax

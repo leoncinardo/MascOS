@@ -1,6 +1,8 @@
-[bits 16]
-[cpu 8086]
 
+BITS 16
+CPU 8086
+
+SECTION .text
 
 ; *Stuff from BPB
 BytesPerSector equ 512 ; Word

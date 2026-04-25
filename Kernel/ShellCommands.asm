@@ -1,7 +1,8 @@
-[bits 16]
-[cpu 8086]
 
+BITS 16
+CPU 8086
 
+SECTION .text
 
 ; Macro that "cleans" the below code
 ; Input:
@@ -406,6 +407,19 @@ RunCmd:
 ; --//  Commands data  \\--
 
 
+TimeString: times 16 db 32
+db 0
+
+LsDummyFileName: times 11 db 0
+db "   ", 0
+
+FileFcb: db CurrentDisk ; Disk
+times 11 db 0 ; File name
+dw 0 ; Current block number
+dw 0 ; Logical record size
+dd 512 ; File size
+
+SECTION .data
 
 HelpText: db "  clear = clears the terminal", NewLine, "  ls = list all files", NewLine, "  touch = create a file", NewLine, "  rename = renames a file", NewLine, "  files = launch the file manager", NewLine, \
 "  time = show time and date", NewLine, "  edit = edit text files", NewLine, "  run = execute a program", NewLine, "  reboot = reboots the system", NewLine, "  shutdown = shutdown the computer", NewLine, \
@@ -413,9 +427,6 @@ HelpText: db "  clear = clears the terminal", NewLine, "  ls = list all files", 
 HimomText: db "Mom: No one cares about you, honey", NewLine, "Thanks mom :(", 0
 
 SoundPlayTrack: dw 6000, 6800, 6300, 5900, 5000, 0
-
-TimeString: times 16 db 32
-db 0
 
 ; Fetch command data
 FetchSpace: db "      ", 0
@@ -437,16 +448,8 @@ FetchLogo5: db "  (/`-'\)   ", 0
 ColourNoArg: db NewLine, "Insert background and foreground colors in hexadecimal, or type reset to use def", NewLine, "ault colours. ", "Example: 0x818a", 0
 ColourResetString: db "reset", 0
 
-LsDummyFileName: times 11 db 0
-db "   ", 0
+FilesProgramFileName: db "FILES   COM", 0
 
-FilesProgramFileName: db "FILEMANACOM", 0
-
-FileFcb: db CurrentDisk ; Disk
-times 11 db 0 ; File name
-dw 0 ; Current block number
-dw 0 ; Logical record size
-dd 512 ; File size
 TouchNameInvalid: db NewLine, "File name must be 11 characters(file extension included)", 0
 
 ; TrashVim program stuff

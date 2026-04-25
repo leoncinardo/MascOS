@@ -1,15 +1,15 @@
 # Custom interrupts
-MascOS uses some custom interrupts to allow external programs to use useful stuff like printing a string or colouring a line. Here's the list of the interrupts and what they do.
+MascOS uses some custom interrupts to allow external programs to do useful stuff like printing a string. Here's a list of interrupts and what they do.
 
 
 ## Int 0x20
 End of program interrupt.
-This interrupt gets invoked whenever an external program ends it's job and wants to **pass control to the kernel**. Doesn't expect any input, just call the interrupt.
+This interrupt should be invoked whenever an external program ends it's job and wants to pass control to the kernel. It doesn't expect any input.
 
 ## Int 0x21
 This is the same interrupt as the MS DOS one. You can find the list of the functions of this interrupt online. Here's the [first one I found online.](http://spike.scu.edu.au/~barry/interrupts.html)
 
-I only have implemented the functions for ah set to 0x1 to 0xa exluding 0x5, then 0xd, 0x19, 0x25, 0x2a, 0x2c, 0x35, 0x4c, 0x56.
+I only have implemented the functions for ah set to 0x1 to 0xA exluding 0x5, then 0xD, 0x19, 0x25, 0x2A, 0x2C, 0x35, 0x4C, 0x56.
 
 ## Int 0x22
 Disk routines for searching, loading files by messing with the FAT12 file system.
@@ -25,21 +25,21 @@ Finds a file in the root directory of FAT12, returning the pointer of the entry.
 `si` = pointer to entry in root dir
 
 ### Load a file
-Loads a file at the specified offset in memory. The offset is specified by `es:bx`.
-Just don't write mistakenly(or on purpose?) write over the kernel or at any lower memory offset.
+Loads a file at the specified offset in memory. The offset is specified in `es:bx`.
+Just don't write mistakenly(or on purpose?) over the kernel or at any lower memory offset.
 
 `ah` = 1<br>
 `ds:si` = offset to entry in root dir<br>
 `es:bx` = offset to read to
 
 ### Get a file name
-Gets the name and file extension of a file, via the specified pointer to the entry in the root directory.
+Gets the name and file extension of a file via the specified pointer to the entry in the root directory.
 
 `ah` = 2<br>
-`ds:si` = pointer to string to output name to. Needs to be 12 characters because remember the 0 at the end.
+`ds:si` = pointer to memory section to output name to. Needs to be 12 characters because remember the 0 at the end.
 
 ### Get a file size
-Gets the file size and returns the value in kilobytes(KB).
+Gets file size and returns the value in kilobytes(KB).
 
 `ah` = 3<br>
 `ds:si` = pointer to entry in root directory

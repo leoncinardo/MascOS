@@ -1,6 +1,6 @@
-[bits 16]
-[cpu 8086]
 
+BITS 16
+CPU 8086
 
 ; *I need to create a VGA driver because I want colours, beautiful colours, aaahhh
 ; *I can't use int 0x10 for this
@@ -8,6 +8,7 @@
 ; ES will be our "base" from where to add the offset
 
 
+SECTION .text
 
 ; Start of vga buffer in memory
 VgaBuffer equ 0xb800 ; Will be moved to es
@@ -15,13 +16,6 @@ VgaBuffer equ 0xb800 ; Will be moved to es
 VgaRows equ 25
 VgaColumns equ 80
 VgaDefaultColour equ 0x0f ; White foreground, black background
-
-NormalColour: db VgaDefaultColour
-AccentColour: db 0x0a
-CurrentRow: db 0
-CurrentColumn: db 0
-CursorPos: dw 0
-
 
 
 VgaInit:
@@ -713,3 +707,11 @@ VgaSetCursor:
     pop bx
     pop ax
     ret
+
+
+CurrentRow: db 0
+CurrentColumn: db 0
+CursorPos: dw 0
+
+NormalColour: db VgaDefaultColour
+AccentColour: db 0x0a

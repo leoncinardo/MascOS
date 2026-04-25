@@ -6,64 +6,51 @@
 ![Floppy Bird running on MascOS](./Showcase/MascOSFloppyBird.jpeg)
 
 ## Current situation of the project
-The latest version shouldn't have bugs but I did fix every one of those I have found. I tried to run these 2 DOS games: [DOS Defender](https://github.com/skeeto/dosdefender-ld31), an Asteroids clone, and [Floppy Bird](https://github.com/icebreaker/floppybird), a Flappy Bird clone. They work but I can't fully test DOS Defender because I don't have a joystick. Other MS DOS programs can *theoretically* run on this not so good operating system, but keep in mind I haven't tested every program and I haven't implemented everything needed for those programs to behave without issues. The "stable" version doesn't have FAT12 and it's there for no reason, other than boosting my energy when I see how much progress I have made since I began this project.
+MascOS was built by me when I was 16 years old so expect bad code/bugs/bad practices. I no longer actively work on this project so don't expect anything new coming.
+
+Other MS DOS programs can *theoretically* run on this not so good operating system, but keep in mind not everything needed has been for those programs to behave without issues or runa t all.
 
 I have tried to boot MascOS with a floppy disk(3.5 inch, 1.44MB) from an external usb floppy drive, and it worked almost flawlessly. It was tested on a Toshiba NB250 laptop.
 
 If you want to learn how to create program for MascOS check [the documentation](ProgramsDocumentation.md).
 
 ## Why MascOS
-It's a learning project. I thought creating an operating system that targets old hardware would be a fun experiment to deal with.
+It's a learning project. I thought creating an operating system that targets old hardware would be a fun experiment to do.
 
 ## Running the operating system
-You can use the .flp image provided in the latest release or compile yourself the operating system. For the last one refer to the `Compiling` section.
-It's very simple, but first you need to install Qemu (you need `qemu-system-i386`).
+The operating system .flp image is called `MascOS.flp` and it's present in the files of this repository.
+To run the os the make file assumes you have `Qemu` installed on your system.
 
-Arch
-```sh
-sudo pacman -S qemu-base
-```
-
-Ubuntu/Linux Mint
-```sh
-sudo apt install qemu
-```
-
-After installing Qemu:
+To launch the os with Qemu use:
 ```sh
 make run
 ```
 
 It uses PulseAudio to emulate the pc speaker, so if you're having troubles to run the operating system use this command instead:
 ```sh
-qemu-system-i386 -fda Build/MascOS.flp -M smm=off -no-shutdown -no-reboot \
+qemu-system-i386 -fda MascOS.flp -M smm=off -no-shutdown -no-reboot \
 	-cpu 486 -rtc base=localtime,clock=host
 ```
 
-If you want to run this on real hardware you need a computer with **legacy BIOS** and *not* a modern UEFI system, since MascOS aims to run on old hardware, and it will hopefully. To get the operating system image you can head to the Releases page, choose the latest release and download the .flp image, alternatively you can compile the os.
+If you want to run this on real hardware you need a computer with **legacy BIOS** and *not* a modern UEFI system, since MascOS aims to run on old hardware.
 
 ## Compiling
-To compile MascOS you need these packages:
- - Nasm
+You must have `NASM` installed(assembler).
 
-To compile the latest version run this command. You need sudo permissions because the Makefile mounts an image to /dev/loop7.
+To compile the os just run:
 ```sh
 sudo make
 ```
 
-You can also choose to compile one of the oldest versions, v0.1.2. There's no purpose for this code to be there other than see how far I have come since I started the project. Note that after compiling it will automatically run the os with Qemu, so you need that installed.
-```sh
-make stable
-```
+You need administrator permission because the make file mounts the os image to `/mnt/floppy` so it can copy necessary files to the .flp image.
 
-Also if you want to remove the compiled files and the os image run:
+If you want to remove compiled files:
 ```sh
 make clean
 ```
 
 
 ## Troubleshooting
-#### OS
 **1. Why does the text in the edit program blink?**
 
 The VGA driver disables bliking to allow to use all 16 colors for background on real VGA hardware. Unfortunately on simulated VGA this doesn't work, and the text blinks.
