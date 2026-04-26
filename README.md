@@ -8,9 +8,9 @@
 ## Current situation of the project
 MascOS was built by me when I was 16 years old so expect bad code/bugs/bad practices. I no longer actively work on this project so don't expect anything new coming.
 
-Other MS DOS programs can *theoretically* run on this not so good operating system, but keep in mind not everything needed has been for those programs to behave without issues or runa t all.
+Other MS DOS programs can *theoretically* run on this not so good operating system, but keep in mind not everything needed has been implemented for those programs to behave without issues or run at all.
 
-I have tried to boot MascOS with a floppy disk(3.5 inch, 1.44MB) from an external usb floppy drive, and it worked almost flawlessly. It was tested on a Toshiba NB250 laptop.
+I have tried to boot MascOS from a floppy disk(3.5 inch, 1.44MB) and it worked almost flawlessly. It was tested on a Toshiba NB250 laptop.
 
 If you want to learn how to create program for MascOS check [the documentation](ProgramsDocumentation.md).
 
@@ -19,9 +19,9 @@ It's a learning project. I thought creating an operating system that targets old
 
 ## Running the operating system
 The operating system .flp image is called `MascOS.flp` and it's present in the files of this repository.
-To run the os the make file assumes you have `Qemu` installed on your system.
+To run the os GNUmakefile assumes you have `Qemu` installed on your system.
 
-To launch the os with Qemu use:
+To launch the os in a VM(Qemu) use:
 ```sh
 make run
 ```
@@ -42,9 +42,9 @@ To compile the os just run:
 sudo make
 ```
 
-You need administrator permission because the make file mounts the os image to `/mnt/floppy` so it can copy necessary files to the .flp image.
+You need administrator permission because GNUmakefile mounts the os image to `/mnt/floppy` so it can copy necessary files to the .flp image.
 
-If you want to remove compiled files:
+If you want to remove all compiled files:
 ```sh
 make clean
 ```
